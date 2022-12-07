@@ -18,7 +18,7 @@ db.Sequelize = Sequelize;
 
 db.Todo = require("./Todo")(sequelize, Sequelize);
 // db = { 'sequelize': sequelize, 'Sequelize': Sequilize, 'Todo': model }
-// model: models/Todo.js에서 Todo가 반환하고 있는 model에
+// model: models/Todo.js에서 Todo가 반환하고 있는 model에 db.Todo에 들어감
 
 module.exports = db;
 // db 객체를 내보냄
