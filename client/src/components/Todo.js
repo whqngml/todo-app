@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Todo = ({ item, deleteItem }) => {
   // console.log(item); // { id: 1, title: 'todo1', done: false, }
-  const { id, title, done } = item;
+  const { id, done } = item;
   const [todoItem, setTodoItem] = useState(item);
   const [readOnly, setReadOnly] = useState(true);
 
@@ -21,11 +21,15 @@ const Todo = ({ item, deleteItem }) => {
     }
   };
 
-  // 체크박스 업데이트
-  // done: ture -> false / done: false -> true
-  const checkBoxHandler = () => {
-    // todoItem.done = !todoItem.done;
-    // setTodoItem(todoItem);
+  // checkbox 업데이트
+  // done: true -> false, fasle, -> true
+  const checkboxEventHandler = (e) => {
+    // rest: id, title 정보
+    const { done, ...rest } = todoItem; // { id: 1, title: 'todo1', done: false, }
+    setTodoItem({
+      done: e.target.checked,
+      ...rest,
+    });
   };
 
   // title input 커서가 깜빡인다고 수정이 가능한것은 아님
@@ -38,6 +42,17 @@ const Todo = ({ item, deleteItem }) => {
     });
   };
 
+  // 강사님의 방법
+  // const editEventHandler = (e) => {
+  //   // rest: id, done 정보
+  //   const { title, ...rest } = todoItem; // { id: 1, title: 'todo1', done: false, }
+
+  //   setTodoItem({
+  //     title: e.target.value,
+  //     ...rest,
+  //   });
+  // };
+
   return (
     <div className="Todo">
       <input
@@ -46,7 +61,7 @@ const Todo = ({ item, deleteItem }) => {
         name={`todo${id}`}
         value={`todo${id}`}
         defaultChecked={done}
-        onClick={checkBoxHandler}
+        onClick={checkboxEventHandler}
       />
       {/* <label htmlFor={`todo${id}`}>{title}</label> */}
       <input
