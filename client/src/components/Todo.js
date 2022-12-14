@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/Todo.scss";
 
 const Todo = ({ item, deleteItem }) => {
   // console.log(item); // { id: 1, title: 'todo1', done: false, }
@@ -66,13 +67,14 @@ const Todo = ({ item, deleteItem }) => {
       {/* <label htmlFor={`todo${id}`}>{title}</label> */}
       <input
         type="text"
+        className="TodoInput"
         value={todoItem.title}
         onChange={editEventHandler}
         readOnly={readOnly}
         onClick={onInputClick}
         onKeyPress={onEnterKeyPress}
       />
-      <button onClick={onDeleteBtnClick}>DELETE</button>
+      <button onClick={onDeleteBtnClick}>🗑️</button>
     </div>
   );
 };
