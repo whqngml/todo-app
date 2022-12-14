@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import "../styles/AddTodo.scss";
 
 const AddTodo = (props) => {
@@ -14,7 +15,7 @@ const AddTodo = (props) => {
     // props로 받아온 addItem 함수 실행
     const AddInput = todoItem.title.trim();
     if (AddInput === "") {
-      alert("할일을 추가해 주세요");
+      Swal.fire("할일을 추가해 주세요");
       setTodoItem({ title: "" }); // input 초기화
       return;
     } else {
@@ -49,6 +50,7 @@ const AddTodo = (props) => {
         value={todoItem.title}
         onChange={(e) => setTodoItem({ title: e.target.value })}
         onKeyPress={onEnterKeyPress}
+        autoFocus
       />
       <button onClick={onButtonClick} className="button fast white">
         ADD
