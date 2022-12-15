@@ -1,4 +1,4 @@
-# Sean Todo App
+# Boohee Todo App
 
 ## Start Project
 
