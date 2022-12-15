@@ -34,6 +34,7 @@ const App = () => {
     // newItem.id = todoId.current++; // key를 위한 id 설정
     // newItem.done = false; // done 초기화
     // 기존 todoItems를 유지하고, 새로운 newItem을 추가
+    // return setTodoItems([...todoItems, newItem]); // setTodoItems(todoItems.concat(newItem))
     postTodo();
   };
 
@@ -41,15 +42,15 @@ const App = () => {
     const newTodoItems = todoItems.filter((item) => item.id !== targetItem.id);
     console.log(newTodoItems);
     setTodoItems(newTodoItems);
-    // const deleteTodo = async () => {
-    //   let destroy = await axios.post("http://localhost:8080/todo/:todoId", {
-    //     title: newItem.title,
-    //   });
-    //   console.log("삭제", destroy.data);
-    //   return setTodoItems([...todoItems, destroy.data]); // setTodoItems(todoItems.concat(newItem))
-    // };
-
-    // deleteTodo();
+    // console.log("타겟", targetItem);
+    const deleteTodo = async () => {
+      let destroy = await axios.delete(
+        `http://localhost:8080/todo/${targetItem.id}`
+      );
+      console.log(destroy);
+      console.log("삭제", targetItem);
+    };
+    deleteTodo();
   };
 
   return (
@@ -59,7 +60,7 @@ const App = () => {
       <div className="left-todos">❤️ {todoItems.length} Todos</div>
       {todoItems.length > 0 ? (
         todoItems.map((item) => {
-          console.log(item); // {id: 1, title: 'My Todo1', done: false}
+          // console.log(item); // {id: 1, title: 'My Todo1', done: false}
           return <Todo key={item.id} item={item} deleteItem={deleteItem} />;
         })
       ) : (
