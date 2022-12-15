@@ -3,7 +3,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/Todo.scss";
 
-const Todo = ({ item, deleteItem }) => {
+const Todo = ({ item, deleteItem, updateItem }) => {
   // console.log(item); // { id: 1, title: 'todo1', done: false, }
   const { id, done } = item;
   const [todoItem, setTodoItem] = useState(item);
@@ -21,7 +21,9 @@ const Todo = ({ item, deleteItem }) => {
   const onEnterKeyPress = (e) => {
     if (e.key === "Enter") {
       setReadOnly(true);
+      updateItem(todoItem); // 테스트용
     }
+    console.log(todoItem);
   };
 
   // checkbox 업데이트
@@ -29,10 +31,12 @@ const Todo = ({ item, deleteItem }) => {
   const checkboxEventHandler = (e) => {
     // rest: id, title 정보
     const { done, ...rest } = todoItem; // { id: 1, title: 'todo1', done: false, }
-    setTodoItem({
+    const updatedItem = {
       done: e.target.checked,
       ...rest,
-    });
+    };
+    setTodoItem(updatedItem);
+    updateItem(updatedItem);
   };
 
   // title input 커서가 깜빡인다고 수정이 가능한것은 아님
