@@ -12,7 +12,7 @@ const App = () => {
     console.log("첫 렌더링 완료!");
 
     const getTodos = async () => {
-      let result = await axios.get("http://localhost:8080/todos");
+      let result = await axios.get("http://49.50.175.211:8080/todos");
       console.log(result);
       setTodoItems(result.data);
     };
@@ -24,7 +24,7 @@ const App = () => {
   // => App 컴포넌트에 addItem() 함수를 정의하고, 해당 함수를 AddTodo props로 넘겨야 함
   const addItem = (newItem) => {
     const postTodo = async () => {
-      let create = await axios.post("http://localhost:8080/todo", {
+      let create = await axios.post("http://49.50.175.211:8080/todo", {
         title: newItem.title,
       });
       console.log("창조", create.data);
@@ -45,7 +45,7 @@ const App = () => {
     // console.log("타겟", targetItem);
     const deleteTodo = async () => {
       let destroy = await axios.delete(
-        `http://localhost:8080/todo/${targetItem.id}`
+        `http://49.50.175.211:8080/todo/${targetItem.id}`
       );
       console.log(destroy);
       console.log("삭제", targetItem);
@@ -59,7 +59,7 @@ const App = () => {
   const updateItem = async (targetItem) => {
     console.log(targetItem);
     await axios.patch(
-      `http://localhost:8080/todo/${targetItem.id}`,
+      `http://49.50.175.211:8080/todo/${targetItem.id}`,
       targetItem
     );
   };
